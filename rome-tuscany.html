@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Italian Adventure: A 10-Day Family Journey to Rome & Tuscany</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, h4, .font-display { font-family: 'Playfair Display', serif; }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 350px;
+        }
+        @media (min-width: 768px) {
+            .chart-container { height: 350px; }
+        }
+        .tab-active {
+            background-color: #A3704C;
+            color: #F8F5F2;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+        .tab-inactive {
+            background-color: #EFEBE7;
+            color: #574B42;
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .day-active {
+            background-color: #A3704C;
+            color: white;
+            transform: scale(1.05);
+        }
+        .day-inactive {
+            background-color: white;
+            color: #574B42;
+        }
+        .option-active {
+            background-color: #A3704C;
+            color: #F8F5F2;
+            border-color: #A3704C;
+        }
+        .option-inactive {
+            background-color: #F8F5F2;
+            color: #574B42;
+            border-color: #DCD7D2;
+        }
+        .family-callout {
+            background: linear-gradient(135deg, #A3704C, #8B6342);
+            color: white;
+            padding: 1rem;
+            border-radius: 1rem;
+            margin: 1rem 0;
+        }
+        .jordens-note {
+            background-color: #E8F4FD;
+            border-left: 4px solid #3B82F6;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 0.5rem 0.5rem 0;
+        }
+        .suzy-special {
+            background: linear-gradient(135deg, #FEF3C7, #FCD34D);
+            border: 2px solid #F59E0B;
+            padding: 1rem;
+            border-radius: 1rem;
+            margin: 1rem 0;
+        }
+        .highlight-card {
+            background: linear-gradient(135deg, #FFF7ED, #FFEDD5);
+            border: 2px solid #FB923C;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+        .food-highlight {
+            background: linear-gradient(135deg, #F0FDF4, #DCFCE7);
+            border: 2px solid #22C55E;
+            border-radius: 0.75rem;
+            padding: 1rem;
+            margin: 0.5rem 0;
+        }
+        .budget-tip {
+            background: linear-gradient(135deg, #EFF6FF, #DBEAFE);
+            border-left: 4px solid #3B82F6;
+            padding: 1rem;
+            border-radius: 0 0.5rem 0.5rem 0;
+            margin: 1rem 0;
+        }
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        .gallery-item {
+            border-radius: 0.75rem;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            transition: transform 0.3s ease;
+        }
+        .gallery-item:hover {
+            transform: scale(1.02);
+        }
+        .cost-breakdown {
+            background: #F8FAFC;
+            border: 1px solid #E2E8F0;
+            border-radius: 0.75rem;
+            padding: 1rem;
+        }
+    </style>
+</head>
+<body class="bg-[#F8F5F2] text-[#574B42]">
+
+    <div class="container mx-auto p-4 md:p-8">
+        
+        <header class="text-center mb-8">
+            <h1 class="text-4xl md:text-5xl font-bold text-[#A3704C] mb-2">The Italian Adventure</h1>
+            <p class="text-lg mt-2 font-display mb-4">Rome & Tuscany • May 2026</p>
+            <div class="flex justify-center items-center gap-4 text-sm text-gray-600">
+                <span>🗓️ 10 Days</span>
+                <span>👥 6 Adults</span>
+                <span>🏛️ 2 Regions</span>
+                <span>✨ Endless Memories</span>
+            </div>
+        </header>
+
+        <nav class="flex justify-center flex-wrap gap-2 md:gap-4 mb-8">
+            <button data-tab="overview" class="tab-button tab-active text-sm md:text-base font-semibold py-2 px-4 rounded-full shadow-sm transition-all duration-300">🗺️ Overview</button>
+            <button data-tab="rome" class="tab-button tab-inactive text-sm md:text-base font-semibold py-2 px-4 rounded-full shadow-sm transition-all duration-300">🏛️ Rome Hub</button>
+            <button data-tab="tuscany" class="tab-button tab-inactive text-sm md:text-base font-semibold py-2 px-4 rounded-full shadow-sm transition-all duration-300">🍇 Tuscany Hub</button>
+            <button data-tab="planner" class="tab-button tab-inactive text-sm md:text-base font-semibold py-2 px-4 rounded-full shadow-sm transition-all duration-300">📋 Family Logistics</button>
+        </nav>
+
+        <main id="content-container">
+
+            <section id="overview" class="tab-content fade-in">
+                <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8">
+                    <h2 class="text-3xl font-bold mb-4 text-center font-display">Our Italian Journey</h2>
+                    
+                    <p class="text-center max-w-3xl mx-auto mb-8 text-lg">This journey balances epic history with countryside charm, designed specifically for our multi-generational crew. We'll start in ancient Rome, then transition to the rolling hills of Tuscany for the perfect blend of culture, relaxation, and family bonding.</p>
+                    
+                    <div class="highlight-card mb-8">
+                        <h3 class="text-xl font-bold mb-2 text-center">🎯 Trip Highlights</h3>
+                        <div class="grid md:grid-cols-3 gap-4 text-center">
+                            <div>
+                                <div class="text-2xl mb-2">🏛️</div>
+                                <strong>Ancient Wonders</strong>
+                                <p class="text-sm">Colosseum, Vatican, Forum</p>
+                            </div>
+                            <div>
+                                <div class="text-2xl mb-2">🍝</div>
+                                <strong>Culinary Adventures</strong>
+                                <p class="text-sm">Cooking classes, wine tastings</p>
+                            </div>
+                            <div>
+                                <div class="text-2xl mb-2">🏊‍♀️</div>
+                                <strong>Tuscan Relaxation</strong>
+                                <p class="text-sm">Pool time, countryside views</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-2 gap-8 items-start">
+                        <div>
+                            <h3 class="text-2xl font-semibold mb-4 text-center font-display">Our Trip Balance</h3>
+                            <div class="jordens-note">
+                                <p><strong>Jorden's Planning Philosophy:</strong> 40% sightseeing, 25% amazing food, 20% pool/relaxation time, 15% travel. This ensures we see the highlights without burning out!</p>
+                            </div>
+                            <div class="chart-container">
+                                <canvas id="paceChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="bg-[#EFEBE7] p-6 rounded-xl">
+                            <h3 class="text-2xl font-semibold mb-4 text-center font-display">Our Two Home Bases</h3>
+                               <div class="space-y-4">
+                                <div class="p-4 bg-white rounded-lg shadow-sm">
+                                    <div class="image-gallery mb-3">
+                                        <div class="gallery-item">
+                                            <img src="https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=400&h=200&fit=crop&crop=center" alt="Rome Colosseum at sunset" class="w-full h-32 object-cover">
+                                        </div>
+                                    </div>
+                                    <h4 class="font-bold text-lg text-[#A3704C] mb-2">Rome: The Ancient Adventure (5 Nights)</h4>
+                                    <p class="text-sm mb-2">Walk through 3,000 years of history. Perfect for Travis's love of ancient civilizations and everyone's sense of wonder.</p>
+                                    <div class="text-xs text-gray-600 flex gap-4">
+                                        <span>🚶‍♀️ Moderate walking</span>
+                                        <span>🎨 World-class museums</span>
+                                        <span>🍕 Amazing food scene</span>
+                                    </div>
+                                </div>
+                                <div class="p-4 bg-white rounded-lg shadow-sm">
+                                    <div class="image-gallery mb-3">
+                                        <div class="gallery-item">
+                                            <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=200&fit=crop&crop=center" alt="Tuscan countryside with rolling hills" class="w-full h-32 object-cover">
+                                        </div>
+                                    </div>
+                                    <h4 class="font-bold text-lg text-[#A3704C] mb-2">Tuscany: Under the Tuscan Sun (5 Nights)</h4>
+                                    <p class="text-sm mb-2">Rolling hills, medieval towns, and authentic Italian food. A perfect base for relaxation and exploration with our rental van.</p>
+                                    <div class="text-xs text-gray-600 flex gap-4">
+                                        <span>🏊‍♀️ Pool time</span>
+                                        <span>🍷 Wine country</span>
+                                        <span>🚗 Scenic drives</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 grid md:grid-cols-2 gap-6">
+                        <div class="budget-tip">
+                            <h4 class="font-bold mb-2">💰 Budget Overview (Per Couple)</h4>
+                            <div class="text-sm space-y-1">
+                                <div class="flex justify-between"><span>Rome (5 nights):</span><span>€1,250 - €1,800</span></div>
+                                <div class="flex justify-between"><span>Tuscany (5 nights):</span><span>€1,375 - €2,125</span></div>
+                                <div class="flex justify-between border-t pt-1 mt-2 font-bold"><span>Total (excluding flights & accommodation):</span><span>€2,625 - €3,925</span></div>
+                            </div>
+                        </div>
+                        <div class="food-highlight">
+                            <h4 class="font-bold mb-2">🍝 Foodie Highlights</h4>
+                            <div class="text-sm space-y-1">
+                                <div>• Hands-on pasta making class in Rome</div>
+                                <div>• Tuscan cooking class at our agriturismo</div>
+                                <div>• Wine tasting in Montepulciano</div>
+                                <div>• Gelato crawl through Trastevere</div>
+                                <div>• Truffle hunting adventure (optional)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="rome" class="tab-content hidden fade-in">
+                   <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8">
+                        <h2 class="text-3xl font-bold mb-2 text-center font-display">Rome: Where History Comes Alive</h2>
+                        <p class="text-center max-w-3xl mx-auto mb-6">Five action-packed days in the Eternal City. Click on each day to see what adventures await our family crew!</p>
+                        
+                        <div class="jordens-note mb-6">
+                            <p><strong>Master Planner's Note:</strong> I've built in strategic rest breaks and kept walking to reasonable distances. The Vatican shortcut tour I found will save us 2+ hours in lines, and I've scheduled gelato breaks for Elizabeth's Instagram content!</p>
+                        </div>
+                        
+                        <div id="rome-timeline" class="flex justify-center flex-wrap gap-2 mb-6"></div>
+                        <div id="rome-day-content" class="bg-[#F8F5F2] p-6 rounded-xl transition-all duration-500 min-h-[400px]"></div>
+                        
+                        <div class="mt-12 border-t-2 border-dashed border-[#DCD7D2] pt-8">
+                            <h3 class="text-3xl font-bold mb-6 text-center font-display">Where We'll Stay & Budget in Rome</h3>
+                            <div class="grid lg:grid-cols-2 gap-8">
+                                <div class="space-y-6">
+                                    <h4 class="text-2xl font-semibold font-display text-center">Accommodation Recommendations</h4>
+                                    <div class="family-callout">
+                                        <p><strong>For Our Group:</strong> I'm leaning toward vacation rentals for the space, price, and kitchen access, but hotels offer daily housekeeping and concierge services that might be nice for our first few jet-lagged days.</p>
+                                    </div>
+                                    
+                                    <div class="bg-[#F8F5F2] p-4 rounded-lg">
+                                        <h5 class="font-bold text-lg text-[#A3704C] mb-3">Option A: Family-Friendly Hotels</h5>
+                                        <p class="text-sm mb-3">Convenience and service - perfect for Suzy & Travis who prefer not to worry about logistics.</p>
+                                        <div class="space-y-3">
+                                            <div class="bg-white p-3 rounded-md shadow-sm">
+                                                <a href="https://www.google.com/search?q=Hotel+Santa+Maria+Rome" target="_blank" class="font-semibold hover:underline text-[#A3704C]">Hotel Santa Maria (Trastevere)</a>
+                                                <p class="text-sm my-2">Peaceful courtyard perfect for our morning coffee routine. Elizabeth will love the Instagram-worthy setting! Walking distance to great restaurants.</p>
+                                                <div class="flex justify-between items-center">
+                                                    <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">✓ Family-friendly</span>
+                                                    <span class="text-sm font-bold">€300 - €450 / night per couple</span>
+                                                </div>
+                                            </div>
+                                            <div class="bg-white p-3 rounded-md shadow-sm">
+                                                <a href="https://www.google.com/search?q=Albergo+Del+Senato+Rome" target="_blank" class="font-semibold hover:underline text-[#A3704C]">Albergo Del Senato (Centro Storico)</a>
+                                                <p class="text-sm my-2">Facing the Pantheon! Minimal walking for sightseeing - great for the whole family. Book a room with Pantheon views for extra magic.</p>
+                                                <div class="flex justify-between items-center">
+                                                    <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">★ Premium location</span>
+                                                    <span class="text-sm font-bold">€350 - €500+ / night per couple</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="bg-[#F8F5F2] p-4 rounded-lg">
+                                        <h5 class="font-bold text-lg text-[#A3704C] mb-3">Option B: <a href="https://www.google.com/search?q=airbnb+vrbo+rome+italy+3+bedroom" target="_blank" class="hover:underline">Vacation Rental</a></h5>
+                                        <div class="bg-white p-3 rounded-md shadow-sm">
+                                            <p class="text-sm mb-2">Space to spread out, kitchen for light meals, and family gathering areas. More cost-effective for 3 couples and gives us flexibility.</p>
+                                            <div class="space-y-2 mb-3">
+                                                <p class="text-sm"><strong>Recommended areas:</strong> Trastevere, Campo de' Fiori, or near Pantheon</p>
+                                                <p class="text-sm"><strong>Must-haves:</strong> 3 bedrooms, 2+ bathrooms, WiFi, A/C</p>
+                                                <p class="text-sm"><strong>Nice-to-haves:</strong> Terrace, washing machine, elevator</p>
+                                            </div>
+                                            <div class="flex justify-between items-center">
+                                                <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">💰 Best value</span>
+                                                <span class="text-sm font-bold">€150 - €235 per couple/night</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <h4 class="text-2xl font-semibold font-display text-center mb-6">Daily Budget Estimate (per couple)</h4>
+                                    <div class="cost-breakdown mb-4">
+                                        <table class="w-full text-sm text-left">
+                                            <thead class="bg-[#DCD7D2]">
+                                                <tr>
+                                                    <th class="p-3 font-semibold">Category</th>
+                                                    <th class="p-3 font-semibold text-center">Comfortable</th>
+                                                    <th class="p-3 font-semibold text-center">Splurge</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr class="border-b border-[#E5E7EB]"><td class="p-3">Breakfast</td><td class="p-3 text-center">€20</td><td class="p-3 text-center">€30</td></tr>
+                                                <tr class="border-b border-[#E5E7EB]"><td class="p-3">Lunch</td><td class="p-3 text-center">€45</td><td class="p-3 text-center">€60</td></tr>
+                                                <tr class="border-b border-[#E5E7EB]"><td class="p-3">Dinner</td><td class="p-3 text-center">€100</td><td class="p-3 text-center">€150+</td></tr>
+                                                <tr class="border-b border-[#E5E7EB]"><td class="p-3">Gelato & Snacks</td><td class="p-3 text-center">€15</td><td class="p-3 text-center">€20</td></tr>
+                                                <tr class="border-b border-[#E5E7EB]"><td class="p-3">Metro/Taxi</td><td class="p-3 text-center">€10</td><td class="p-3 text-center">€20</td></tr>
+                                                <tr class="border-b border-[#E5E7EB]"><td class="p-3">Sights/Tours</td><td class="p-3 text-center">€60</td><td class="p-3 text-center">€80+</td></tr>
+                                                <tr class="bg-white"><td class="p-3 font-bold">Daily Total</td><td class="p-3 text-center font-bold text-[#A3704C]">~€250</td><td class="p-3 text-center font-bold">~€360+</td></tr>
+                                            </tbody>
+                                        </table>
+                                        <p class="text-xs mt-2 text-gray-500">Note: Excludes accommodation. Includes tickets to major attractions.</p>
+                                    </div>
+                                    
+                                    <div class="bg-yellow-50 border border-yellow-200 p-3 rounded-lg">
+                                        <h5 class="font-bold text-sm mb-1">💡 Money-Saving Tips:</h5>
+                                        <ul class="text-xs space-y-1">
+                                            <li>• Roma Pass (€32) includes metro + 2 free attractions</li>
+                                            <li>• Happy hour aperitivo includes free snacks</li>
+                                            <li>• Many churches are free (just dress appropriately)</li>
+                                            <li>• Grocery shop for breakfast if staying in rental</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </section>
+
+            <section id="tuscany" class="tab-content hidden fade-in">
+                <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8">
+                    <h2 class="text-3xl font-bold mb-2 text-center font-display">Tuscany: Renaissance & Rolling Hills</h2>
+                    <p class="text-center max-w-3xl mx-auto mb-6">Time to trade ancient history for Renaissance art and cypress-lined roads. These five days are about embracing the Tuscan lifestyle: art, food, wine, and relaxation.</p>
+                    
+                    <div class="highlight-card mb-6">
+                        <h3 class="text-xl font-bold mb-2 text-center">🚗 Road Trip Freedom</h3>
+                        <p class="text-center">With our 9-passenger van, we can explore hidden gems, stop at roadside vineyards, and create spontaneous memories. The real Tuscany is found off the beaten path!</p>
+                    </div>
+                    
+                    <div id="tuscany-timeline" class="flex justify-center flex-wrap gap-2 mb-6"></div>
+                    <div id="tuscany-day-content" class="bg-[#F8F5F2] p-6 rounded-xl transition-all duration-500 min-h-[400px]"></div>
+
+                    <div class="mt-12 border-t-2 border-dashed border-[#DCD7D2] pt-8">
+                        <h3 class="text-3xl font-bold mb-6 text-center font-display">Tuscan Accommodation & Budget</h3>
+                        <div class="grid lg:grid-cols-2 gap-8">
+                            <div class="space-y-6">
+                                <h4 class="text-2xl font-semibold font-display text-center">Where We'll Stay</h4>
+                                
+                                <div class="bg-[#F8F5F2] p-4 rounded-lg">
+                                    <h5 class="font-bold text-lg text-[#A3704C] mb-3">Option A: Agriturismo Experience</h5>
+                                    <p class="text-sm mb-3">The classic Tuscan experience: a working farm with guest accommodations. Perfect for families seeking authentic Italian countryside life.</p>
+                                    <div class="space-y-3">
+                                        <div class="bg-white p-3 rounded-md shadow-sm">
+                                            <a href="https://www.castellareditonda.com/en/" target="_blank" class="font-semibold hover:underline text-[#A3704C]">Castellare di Tonda</a>
+                                            <p class="text-sm my-2">Family-focused resort with mini-club, cooking classes, horseback riding, and multiple pools. Kids and adults will love the activities!</p>
+                                            <div class="flex justify-between items-center">
+                                                <div class="flex gap-1">
+                                                    <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">👨‍👩‍👧‍👦 Family</span>
+                                                    <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">🏊‍♀️ Pool</span>
+                                                </div>
+                                                <span class="text-sm font-bold">€250 - €400+ / night</span>
+                                            </div>
+                                        </div>
+                                        <div class="bg-white p-3 rounded-md shadow-sm">
+                                            <a href="https://www.villa-lena.it/" target="_blank" class="font-semibold hover:underline text-[#A3704C]">Villa Lena</a>
+                                            <p class="text-sm my-2">Unique blend of agriturismo and artist residency. Farm-to-table dining, creative workshops, and Instagram-worthy spaces.</p>
+                                            <div class="flex justify-between items-center">
+                                                <div class="flex gap-1">
+                                                    <span class="text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded">🎨 Artsy</span>
+                                                    <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">🍽️ Farm-to-table</span>
+                                                </div>
+                                                <span class="text-sm font-bold">€300 - €500+ / night</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-[#F8F5F2] p-4 rounded-lg">
+                                    <h5 class="font-bold text-lg text-[#A3704C] mb-3">Option B: <a href="https://www.tuscany-villas.it/3-bedroom-villas-tuscany.html" target="_blank" class="hover:underline">Private Villa Rental</a></h5>
+                                    <div class="bg-white p-3 rounded-md shadow-sm">
+                                        <p class="text-sm mb-2">Your own private slice of Tuscany. Great for family meals, poolside relaxation, and having space to spread out after busy sightseeing days.</p>
+                                        <div class="space-y-2 mb-3">
+                                            <p class="text-sm"><strong>Must-haves:</strong> Pool, 3+ bedrooms, full kitchen, outdoor dining</p>
+                                            <p class="text-sm"><strong>Recommended areas:</strong> Chianti region, Val d'Orcia, or near San Gimignano</p>
+                                            <p class="text-sm text-red-600"><strong>⚠️ Important:</strong> Villas with pools book up 6+ months in advance! Need to reserve ASAP for May 2026.</p>
+                                        </div>
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">💰 Best value for groups</span>
+                                            <span class="text-sm font-bold">€135 - €270+ per couple/night</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <h4 class="text-2xl font-semibold font-display text-center mb-6">Daily Budget (per couple)</h4>
+                                <div class="cost-breakdown mb-4">
+                                    <table class="w-full text-sm text-left">
+                                        <thead class="bg-[#DCD7D2]">
+                                            <tr>
+                                                <th class="p-3 font-semibold">Category</th>
+                                                <th class="p-3 font-semibold text-center">Comfortable</th>
+                                                <th class="p-3 font-semibold text-center">Splurge</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="border-b border-[#E5E7EB]"><td class="p-3">Breakfast</td><td class="p-3 text-center">€20</td><td class="p-3 text-center">€30</td></tr>
+                                            <tr class="border-b border-[#E5E7EB]"><td class="p-3">Lunch</td><td class="p-3 text-center">€50</td><td class="p-3 text-center">€75</td></tr>
+                                            <tr class="border-b border-[#E5E7EB]"><td class="p-3">Dinner</td><td class="p-3 text-center">€110</td><td class="p-3 text-center">€170+</td></tr>
+                                            <tr class="border-b border-[#E5E7EB]"><td class="p-3">Aperitivo & Wine</td><td class="p-3 text-center">€25</td><td class="p-3 text-center">€40</td></tr>
+                                            <tr class="border-b border-[#E5E7EB]"><td class="p-3">Transport (Car Rental)</td><td class="p-3 text-center">€30</td><td class="p-3 text-center">€50</td></tr>
+                                            <tr class="border-b border-[#E5E7EB]"><td class="p-3">Activities</td><td class="p-3 text-center">€40</td><td class="p-3 text-center">€60+</td></tr>
+                                            <tr class="bg-white"><td class="p-3 font-bold">Daily Total</td><td class="p-3 text-center font-bold text-[#A3704C]">~€275</td><td class="p-3 text-center font-bold">~€425+</td></tr>
+                                        </tbody>
+                                    </table>
+                                    <p class="text-xs mt-2 text-gray-500">Note: Major tours and wine tastings are separate expenses.</p>
+                                </div>
+                                
+                                <div class="bg-green-50 border border-green-200 p-3 rounded-lg">
+                                    <h5 class="font-bold text-sm mb-1">🍷 Tuscany Money Tips:</h5>
+                                    <ul class="text-xs space-y-1">
+                                        <li>• Many wineries offer free tastings with purchase</li>
+                                        <li>• Lunch menus are cheaper than dinner</li>
+                                        <li>• Agriturismo meals are excellent value</li>
+                                        <li>• Split gas costs for the rental van</li>
+                                        <li>• Grocery shop for villa breakfasts and picnics</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="planner" class="tab-content hidden fade-in">
+                <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8">
+                       <h2 class="text-3xl font-bold mb-2 text-center font-display">Family Logistics Central</h2>
+                       <p class="text-center max-w-3xl mx-auto mb-8">All the practical details to make our trip smooth and stress-free.</p>
+                       
+                       <div class="grid md:grid-cols-2 gap-8">
+                            <div class="bg-[#F8F5F2] p-6 rounded-xl">
+                                <h3 class="text-2xl font-semibold mb-4 font-display">🚗 Getting Around Tuscany</h3>
+                                <div class="family-callout mb-4">
+                                    <p><strong>Master Planner's Advice:</strong> A 9-passenger van is the way to go for our group. It gives us the freedom to explore the countryside at our own pace and stop at those Instagram-worthy cypress tree spots!</p>
+                                </div>
+                                <div id="tuscany-options" class="flex flex-wrap gap-2 mb-4"></div>
+                                <div id="tuscany-details"></div>
+                            </div>
+                            
+                            <div class="bg-[#F8F5F2] p-6 rounded-xl">
+                                <h3 class="text-2xl font-semibold mb-4 font-display">🎨 Tuscan Adventures</h3>
+                                <div class="suzy-special mb-4">
+                                    <p><strong>Suzy's Dream Activities:</strong> From cooking classes to truffle hunting, I've found some amazing experiences that will make our family trip truly special and memorable!</p>
+                                </div>
+                                <div id="amalfi-options" class="flex flex-wrap gap-2 mb-4"></div>
+                                <div id="amalfi-details"></div>
+                            </div>
+                            
+                            <div class="bg-[#F8F5F2] p-6 rounded-xl">
+                                <h3 class="text-2xl font-semibold mb-4 font-display">📅 Master Booking Timeline</h3>
+                                <div class="jordens-note mb-4">
+                                    <p><strong>Jorden's Booking Strategy:</strong> I've prioritized what needs immediate attention. Borghese Gallery sells out months ahead, and good Tuscan villas disappear fast!</p>
+                                </div>
+                                 <ul id="booking-checklist" class="space-y-2"></ul>
+                            </div>
+                            
+                            <div class="bg-[#F8F5F2] p-6 rounded-xl">
+                                <h3 class="text-2xl font-semibold mb-4 font-display">🧳 Family Packing Essentials</h3>
+                                <div class="budget-tip mb-4">
+                                    <p><strong>Smart Packing Tip:</strong> Pack layers! May weather can be unpredictable, and you'll want options for everything from pool time to church visits.</p>
+                                </div>
+                                <ul id="packing-checklist" class="space-y-2"></ul>
+                            </div>
+                       </div>
+                       
+                       <div class="mt-8 bg-gradient-to-r from-yellow-100 to-orange-100 p-6 rounded-xl border-2 border-yellow-300">
+                            <h3 class="text-2xl font-bold mb-4 text-center">💭 Questions for the Family</h3>
+                            <div class="grid md:grid-cols-2 gap-4 text-sm">
+                                <div class="bg-white p-3 rounded-lg">
+                                    <h4 class="font-bold mb-2">🏨 Accommodation Preference:</h4>
+                                    <p>Hotel convenience vs. Rental space & savings?</p>
+                                    <p class="text-xs text-gray-600 mt-1">Hotels: Service, daily cleaning, concierge<br>Rentals: Space, kitchen, better value for groups</p>
+                                </div>
+                                <div class="bg-white p-3 rounded-lg">
+                                    <h4 class="font-bold mb-2">🍽️ Dining Style:</h4>
+                                    <p>Every meal out vs. some meals "at home"?</p>
+                                    <p class="text-xs text-gray-600 mt-1">All restaurants: More variety, less planning<br>Mixed: Save money, family bonding, grocery shopping</p>
+                                </div>
+                                <div class="bg-white p-3 rounded-lg">
+                                    <h4 class="font-bold mb-2">⚡ Activity Level:</h4>
+                                    <p>Packed schedule vs. more downtime?</p>
+                                    <p class="text-xs text-gray-600 mt-1">Packed: See everything, maximize time<br>Relaxed: Less rushing, spontaneous discoveries</p>
+                                </div>
+                                <div class="bg-white p-3 rounded-lg">
+                                    <h4 class="font-bold mb-2">💎 Splurge Priorities:</h4>
+                                    <p>Private tours vs. amazing dinners vs. luxury hotels?</p>
+                                    <p class="text-xs text-gray-600 mt-1">Everyone has different preferences - let's discuss!</p>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4 bg-white p-4 rounded-lg">
+                                <h4 class="font-bold mb-2 text-center">📋 Decision Points to Discuss:</h4>
+                                <div class="grid md:grid-cols-2 gap-4 text-sm">
+                                    <div>
+                                        <p><strong>Rome:</strong> Hotel in Trastevere vs. Centro Storico vs. Large rental?</p>
+                                        <p><strong>Tuscany:</strong> Agriturismo vs. Private villa with pool?</p>
+                                    </div>
+                                    <div>
+                                        <p><strong>Transportation:</strong> Everyone comfortable with van rental?</p>
+                                        <p><strong>Optional activities:</strong> Hot air balloon? Truffle hunting? Cooking classes?</p>
+                                    </div>
+                                </div>
+                            </div>
+                       </div>
+                </div>
+            </section>
+
+        </main>
+        
+        <footer class="text-center mt-12 p-6 bg-white rounded-xl shadow-lg">
+            <p class="text-sm text-gray-600 mb-2">Crafted with love by your Master Planner • Family Trip 2026</p>
+            <div class="flex justify-center gap-4 text-xs text-gray-500">
+                <span>🇮🇹 La Dolce Vita awaits</span>
+                <span>📧 Questions? Let's discuss!</span>
+                <span>✈️ Adventure starts here</span>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        const data = {
+            rome: [
+                {
+                    day: 1,
+                    title: "Ciao Roma! Gentle Arrival",
+                    vibe: "Ease into the Roman rhythm - no rushing, just soaking in the magic.",
+                    image: "https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?w=600&h=400&fit=crop&crop=center",
+                    highlights: ["First taste of authentic Roman cuisine", "Evening stroll through historic streets", "Gelato tradition begins!"],
+                    schedule: [
+                        { time: "15:00-17:00", activity: "Landing & Check-in", description: "Everyone settles in at their own pace, gets organized, and prepares for the Roman adventure! Time to freshen up and get excited." },
+                        { time: "17:00-19:00", activity: "First Roman Passeggiata", description: "A gentle family stroll to nearby Piazza Navona. Perfect for those first 'we're in Italy!' photos for Suzy and getting our bearings in this ancient city." },
+                        { time: "19:00-20:30", activity: "Welcome Family Dinner", description: "Classic trattoria dinner at Tonnarello in Trastevere. Roman specialties like cacio e pepe and carbonara - the real deal!" },
+                        { time: "20:30 onwards", activity: "The Gelato Tradition Begins", description: "First family gelato run! Fatamorgana has amazing artisanal flavors. This becomes our nightly ritual." },
+                    ]
+                },
+                {
+                    day: 2,
+                    title: "Walking with Emperors",
+                    vibe: "Ancient Rome comes alive - Travis's history buff paradise!",
+                    image: "https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=600&h=400&fit=crop&crop=center",
+                    highlights: ["Colosseum gladiator stories", "Roman Forum ancient streets", "Palatine Hill emperor palaces"],
+                    schedule: [
+                        { time: "9:00-12:30", activity: "Colosseum, Forum & Palatine", description: "Pre-booked family tour with skip-the-line access. Our guide will bring ancient Rome to life - Travis and Jorden can geek out over the history while everyone enjoys the stories!" },
+                        { time: "12:30-14:00", activity: "Lunch Away from Crowds", description: "Walk to a quieter spot for authentic Roman pasta. Our tour guide will have local recommendations away from the tourist traps!" },
+                        { time: "14:00-16:00", activity: "Mandatory Siesta Time", description: "Back to hotel for rest - essential for jet lag recovery! The girls can plan tomorrow's outfits and share photos." },
+                        { time: "16:00-18:00", activity: "The Pantheon Marvel", description: "Mind-blowing ancient engineering that still amazes architects today. Free to enter and absolutely magical." },
+                        { time: "19:30 onwards", activity: "Dinner in Hip Monti", description: "Explore this trendy neighborhood Elizabeth will love. Great Instagram spots, craft cocktails, and family-friendly restaurants." },
+                    ]
+                },
+                {
+                    day: 3,
+                    title: "Vatican City Wonders",
+                    vibe: "Art, spirituality, and Michelangelo's genius - prepare to be amazed",
+                    image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=600&h=400&fit=crop&crop=center",
+                    highlights: ["Sistine Chapel ceiling", "St. Peter's Basilica majesty", "Vatican Museums treasures"],
+                    schedule: [
+                        { time: "8:00-13:00", activity: "Vatican Museums & Sistine Chapel", description: "Early entry tour with our special shortcut to St. Peter's - saves 2+ hours of walking! The Sistine Chapel will leave everyone speechless, especially Suzy." },
+                        { time: "13:00-14:30", activity: "Vatican Lunch", description: "200 Gradi for amazing paninis and pizza, or Hostaria Dino e Toni for traditional Roman pasta. Both are family-friendly with great food." },
+                        { time: "14:30-16:30", activity: "St. Peter's Basilica", description: "The world's largest church! Michelangelo's Pietà is unmissable. Dome climb is optional - maybe just the adventurous ones (Brian and Elizabeth?)." },
+                        { time: "16:30-18:00", activity: "Castel Sant'Angelo Views", description: "Perfect photo ops from Ponte Sant'Angelo. The bridge offers stunning views and great family photos with the castle backdrop." },
+                        { time: "Evening", activity: "Relaxed Dinner", description: "Casual evening near our accommodation. Everyone will be art-exhausted but amazed!" },
+                    ]
+                },
+                {
+                    day: 4,
+                    title: "Roman Holiday Finale",
+                    vibe: "Living like locals - shopping, cooking, and celebrating our Roman adventure",
+                    image: "https://images.unsplash.com/photo-1525874684015-58379d421a52?w=600&h=400&fit=crop&crop=center",
+                    highlights: ["Hands-on pasta making", "Trevi Fountain wishes", "Villa Borghese gardens"],
+                    schedule: [
+                        { time: "10:00-11:00", activity: "Trevi Fountain & Spanish Steps", description: "Start at the famous fountain for family photos and coin wishes. Then walk to Spanish Steps for more classic Roman sights." },
+                        { time: "11:30-14:30", activity: "Hands-on Cooking Class", description: "Learn to make fresh pasta, gnocchi, and tiramisu! A fun interactive experience where everyone gets involved. We eat what we make!" },
+                        { time: "15:00-17:00", activity: "Villa Borghese Gardens", description: "If art lovers want the Borghese Gallery (book NOW!), others can enjoy the beautiful park. Rent a family pedal cart or just relax." },
+                        { time: "17:00-18:30", activity: "Last-Minute Shopping", description: "Via del Corso for souvenirs, or local markets for Italian specialties to take home." },
+                        { time: "19:30 onwards", activity: "Farewell Roman Feast", description: "Special last dinner at Da Enzo al 29 (worth the wait) or Armando al Pantheon. A toast to our Roman adventure and excitement for Tuscany!" },
+                    ]
+                },
+                {
+                    day: 5,
+                    title: "Arrivederci Roma, Ciao Tuscany!",
+                    vibe: "Trading city cobblestones for cypress-lined roads and vineyard views",
+                    image: "https://images.unsplash.com/photo-1549643449-3979452445b2?w=600&h=400&fit=crop&crop=center",
+                    highlights: ["High-speed train to Florence", "Van rental pickup", "First Tuscan sunset"],
+                    schedule: [
+                        { time: "9:00-10:30", activity: "Check-out & Rome Termini", description: "Last Roman breakfast, pack up, and head to the train station. The adventure continues!" },
+                        { time: "10:30-12:00", activity: "High-Speed Train to Florence", description: "Comfortable Trenitalia Frecciarossa train (1.5 hours). Watch the countryside change from Roman hills to Tuscan beauty." },
+                        { time: "12:00-14:00", activity: "Van Rental & First Drive", description: "Pick up our 9-passenger van at Florence Airport (avoids city center ZTL zones). First taste of Tuscan roads!" },
+                        { time: "14:00-16:00", activity: "Check into Agriturismo/Villa", description: "Settle into our Tuscan home base for the next 5 nights. Everyone claims their rooms and explores the property." },
+                        { time: "16:00-18:00", activity: "Pool Time & Exploration", description: "First dip in the Tuscan pool! Explore the grounds, maybe meet some farm animals if we're at an agriturismo." },
+                        { time: "18:00 onwards", activity: "Sunset Aperitivo & Welcome Dinner", description: "Chianti wine, local cheese, and our first authentic Tuscan meal. Welcome to la dolce vita!" },
+                    ]
+                }
+            ],
+            tuscany: [
+                {
+                    day: 6,
+                    title: "Renaissance Wonders in Florence",
+                    vibe: "Immersing ourselves in the art capital of the Renaissance",
+                    image: "https://images.unsplash.com/photo-1476362174823-3a23f4aa6d76?w=600&h=600&fit=crop&crop=center",
+                    highlights: ["Brunelleschi's Dome climb", "Ponte Vecchio shopping", "Florentine steak dinner"],
+                    schedule: [
+                        { time: "9:00-12:00", activity: "Florence's Duomo Complex", description: "Marvel at Brunelleschi's masterpiece dome, Giotto's Bell Tower, and the Baptistery. Pre-book tickets to climb the dome for incredible city views (425 steps but worth it!)." },
+                        { time: "12:00-13:30", activity: "Mercato Centrale Lunch", description: "Food lover's paradise! The upstairs food court has everything from fresh pasta to Tuscan sandwiches. Perfect for different tastes in our group." },
+                        { time: "13:30-16:00", activity: "Ponte Vecchio & Oltrarno", description: "Stroll across the famous gold bridge, then explore the artisan workshops of the Oltrarno district. Elizabeth will love the jewelry and leather goods!" },
+                        { time: "16:00-17:30", activity: "Gelato & Shopping Break", description: "Vivoli or Perché No! for the best gelato in Florence. Browse local boutiques and pick up Tuscan leather goods." },
+                        { time: "19:30 onwards", activity: "Bistecca alla Fiorentina Dinner", description: "Try the famous Florentine T-bone steak at Trattoria Sostanza or Il Latini. Vegetarians will love the ribollita soup and fresh pasta options." },
+                    ]
+                },
+                {
+                    day: 7,
+                    title: "Medieval Marvels: Siena & San Gimignano",
+                    vibe: "A tale of two cities: Gothic grandeur and medieval towers",
+                    image: "https://images.unsplash.com/photo-1604142056225-1feabdac3af1?w=600&h=400&fit=crop&crop=center",
+                    highlights: ["Siena's shell-shaped piazza", "San Gimignano's tower skyline", "Tuscan countryside drive"],
+                    schedule: [
+                        { time: "9:00-12:30", activity: "Siena's Piazza del Campo", description: "Explore one of Europe's greatest medieval squares. Climb Torre del Mangia for panoramic views. Learn about the famous Palio horse race that happens here twice a year!" },
+                        { time: "12:30-14:00", activity: "Sienese Lunch Specialties", description: "Try pici pasta (thick hand-rolled noodles) and wild boar ragu. Osteria Le Logge or Il Carroccio are great family options." },
+                        { time: "14:00-17:00", activity: "San Gimignano's Medieval Towers", description: "Drive through gorgeous countryside to this UNESCO World Heritage 'Manhattan of the Middle Ages.' Climb Torre Grossa for amazing views!" },
+                        { time: "17:00-18:00", activity: "Gelato World Champions", description: "Gelateria Dondoli won World Gelato Championships! Try their saffron and Vernaccia wine flavors - unique to San Gimignano." },
+                        { time: "Evening", activity: "Agriturismo Family Dinner", description: "Relaxing evening back at our base. Maybe arrange a family cooking class if we're feeling ambitious, or just enjoy the peaceful Tuscan evening." },
+                    ]
+                },
+                {
+                    day: 8,
+                    title: "Val d'Orcia: Postcard Perfect Tuscany",
+                    vibe: "Rolling hills, cypress trees, and Instagram-worthy landscapes",
+                    image: "https://images.unsplash.com/photo-1718338561052-bdd1c58ddf6d?w=600&h=400&fit=crop&crop=center",
+                    highlights: ["Pienza pecorino cheese", "Montepulciano wine cellars", "Cypress-lined roads"],
+                    schedule: [
+                        { time: "9:00-12:00", activity: "Pienza: The Ideal Renaissance Town", description: "Explore this UNESCO site designed as the 'ideal city.' Famous for its pecorino cheese - we'll visit local shops for tastings. The views from the town walls are spectacular!" },
+                        { time: "12:00-13:30", activity: "Scenic Picnic Lunch", description: "Grab fresh bread, local pecorino, prosciutto, and wine for a quintessential Tuscan picnic overlooking the Val d'Orcia. Those cypress tree photos happen here!" },
+                        { time: "14:00-17:00", activity: "Montepulciano Wine Experience", description: "Visit historic wine cellars carved into the hillside. Taste the famous Vino Nobile while learning about Tuscan winemaking traditions. Designated drivers can enjoy the views!" },
+                        { time: "17:00-18:30", activity: "Golden Hour Drive", description: "Take the scenic route back through the Val d'Orcia during golden hour. Stop at the famous Cappella della Madonna di Vitaleta for photos." },
+                        { time: "19:30 onwards", activity: "Special Tuscan Farewell Feast", description: "Celebrate our Tuscan adventure with a memorable dinner. Either at a top restaurant in Montalcino or a special meal at our agriturismo." },
+                    ]
+                },
+                {
+                    day: 9,
+                    title: "Choose Your Own Tuscan Adventure",
+                    vibe: "Relax by the pool or embark on unique Tuscan experiences",
+                    image: "https://images.unsplash.com/photo-1596641069082-b1d5ac2b6fc1?w=600&h=400&fit=crop&crop=center",
+                    highlights: ["Pool relaxation", "Optional adventures", "Family bonding time"],
+                    schedule: [
+                        { time: "Morning", activity: "Leisurely Poolside Start", description: "Sleep in, enjoy a long breakfast with Tuscan views, and relax by the pool. Perfect day for reading, photos, and family conversations." },
+                        { time: "Optional A", activity: "Hot Air Balloon Adventure", description: "Early morning balloon ride over the Tuscan countryside for the adventurous! Breathtaking views, champagne toast, and unforgettable memories. (~€250/person, 3-4 hours total)" },
+                        { time: "Optional B", activity: "Truffle Hunting Experience", description: "Join a local truffle hunter and their trained dog in the woods around San Miniato. Learn about this prized delicacy and enjoy a truffle lunch! (~€150/person)" },
+                        { time: "Optional C", activity: "Chianti Winery Tour", description: "Visit 2-3 family-owned wineries in the Chianti Classico region. Tastings, cellar tours, and stunning vineyard views. (~€100/person)" },
+                        { time: "Afternoon", activity: "Villa Relaxation", description: "Pool time, naps, reading, and enjoying our beautiful Tuscan base. Some might want to explore local villages or shop for olive oil." },
+                        { time: "Evening", activity: "Casual Family Pizza Night", description: "Low-key dinner at our villa or a local pizzeria. Perfect for sharing stories from our adventures and planning our final day." },
+                    ]
+                },
+                {
+                    day: 10,
+                    title: "Arrivederci, Bella Italia",
+                    vibe: "Savoring final moments and bittersweet goodbyes",
+                    image: "https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?w=600&h=400&fit=crop&crop=center",
+                    highlights: ["Last Tuscan breakfast", "Souvenir shopping", "Memory sharing"],
+                    schedule: [
+                        { time: "8:00-10:00", activity: "Final Tuscan Breakfast", description: "Savor one last leisurely breakfast with those beautiful Tuscan views. Perfect time for final photos around our agriturismo or villa." },
+                        { time: "10:00-11:30", activity: "Pack & Check Out", description: "Pack our bags (and all those Italian treasures!), check out, and say goodbye to our Tuscan home. Group photo with our hosts!" },
+                        { time: "11:30-13:00", activity: "Last-Minute Florence Shopping", description: "Quick stop in Florence for any final souvenirs. Leather goods, olive oil, wine, or that perfect Italian outfit for Elizabeth." },
+                        { time: "13:00-14:30", activity: "Final Italian Lunch", description: "One last incredible meal together in Florence. Toast to our amazing 10 days and start planning the next family adventure!" },
+                        { time: "15:00 onwards", activity: "Journey Home", description: "Return the van, catch our flights, and head home with hearts full of Italian memories, phones full of photos, and plans for our next adventure!" },
+                    ]
+                }
+            ],
+            planner: {
+                tuscanyOptions: [
+                    { 
+                        name: "Rental Van", 
+                        title: "9-Passenger Rental Van", 
+                        cost: "~€100-150/day", 
+                        flexibility: "Maximum", 
+                        comfort: "Excellent", 
+                        kidFriendliness: "Perfect", 
+                        description: "A spacious 9-passenger van gives us ultimate freedom to explore Tuscany's backroads, hilltop towns, and hidden gems at our own pace. Perfect for our large group with plenty of room for luggage and shopping finds.", 
+                        bestFor: "Families who want flexibility, the ability to explore off-the-beaten-path destinations, and don't mind having a designated driver each day. Great for spontaneous stops at vineyards and photo opportunities." 
+                    },
+                    { 
+                        name: "Train & Driver", 
+                        title: "Train + Private Driver Combo", 
+                        cost: "~€500-700/day", 
+                        flexibility: "Good", 
+                        comfort: "Luxury", 
+                        kidFriendliness: "Very Good", 
+                        description: "Combine high-speed trains between major cities with a private driver for day trips. Less stressful than driving and parking in medieval town centers, but more expensive. Driver doubles as local guide.", 
+                        bestFor: "Families who want a stress-free experience, prefer not to drive in foreign countries, and are willing to splurge on convenience and local expertise." 
+                    },
+                    { 
+                        name: "Group Tours", 
+                        title: "Small Group Day Tours", 
+                        cost: "~€100-150/person", 
+                        flexibility: "Limited", 
+                        comfort: "Good", 
+                        kidFriendliness: "Good", 
+                        description: "Join small-group tours (8-12 people) for day trips from Florence. Good option if you don't want to drive, includes transportation and guide. Less flexible schedule but educational.", 
+                        bestFor: "Families who prefer not to drive, want a guided experience with historical context, and don't mind fixed schedules. Good for meeting other travelers." 
+                    }
+                ],
+                amalfiOptions: [
+                    { 
+                        name: "Cooking Class", 
+                        title: "Tuscan Family Cooking Class", 
+                        cost: "~€100-150/person", 
+                        scenicValue: "Delicious", 
+                        comfort: "Excellent", 
+                        familyFriendly: "Perfect", 
+                        description: "Hands-on cooking class where we'll learn to make fresh pasta, gnocchi, ragu, and tiramisu. Usually includes market visit, cooking session, and family-style meal. Great for all skill levels and ages.", 
+                        bestFor: "Families who love food, want an interactive cultural experience, and enjoy learning new skills together. Perfect souvenir: recipes to recreate at home!" 
+                    },
+                    { 
+                        name: "Truffle Hunting", 
+                        title: "Truffle Hunting Adventure", 
+                        cost: "~€150-200/person", 
+                        scenicValue: "Unique", 
+                        comfort: "Good", 
+                        familyFriendly: "Very Good", 
+                        description: "Join a local truffle hunter and their specially trained dog on a search for this prized delicacy in the Tuscan woods. Includes truffle lunch and wine tasting. A truly unique experience!", 
+                        bestFor: "Adventurous families looking for a one-of-a-kind experience, nature lovers, and foodies excited to learn about this luxury ingredient. Great for creating unique memories!" 
+                    },
+                    { 
+                        name: "Hot Air Balloon", 
+                        title: "Hot Air Balloon Ride", 
+                        cost: "~€250-300/person", 
+                        scenicValue: "Breathtaking", 
+                        comfort: "Good", 
+                        familyFriendly: "Good", 
+                        description: "Soar above the rolling hills and vineyards of Tuscany for a bird's-eye view of the stunning landscape. Early morning flights include champagne toast and unforgettable photo opportunities.", 
+                        bestFor: "Early risers looking for a splurge-worthy adventure, romantic couples, and anyone wanting the ultimate Tuscan experience. Weather dependent but absolutely magical when conditions are right." 
+                    }
+                ],
+                booking: [
+                    { item: "✈️ International flights to Rome", timeframe: "BOOK NOW - 3-6 months out for best prices", priority: "Critical", note: "Consider open-jaw tickets (Rome in, Florence out)" },
+                    { item: "🏡 Tuscan Villa/Agriturismo with pool", timeframe: "BOOK NOW - 6+ months out for best properties", priority: "Critical", note: "May is peak season - best villas book early" },
+                    { item: "🏨 Rome accommodation (3 bedrooms)", timeframe: "BOOK NOW - 3-4 months out", priority: "Critical", note: "Trastevere and Centro Storico fill up fast" },
+                    { item: "🚗 9-Passenger Van Rental in Florence", timeframe: "2-3 months out", priority: "High", note: "Book through airport location to avoid ZTL zones" },
+                    { item: "🎨 Borghese Gallery tickets", timeframe: "Book exactly 3 months prior on 1st of month", priority: "High", note: "Sells out within hours - set calendar reminder!" },
+                    { item: "⛪ Vatican shortcut tour with early entry", timeframe: "1-2 months out", priority: "High", note: "Skip-the-line tours save 2+ hours of waiting" },
+                    { item: "🏛️ Colosseum & Forum tickets", timeframe: "2-4 weeks out", priority: "Medium", note: "Book timed entry to avoid crowds" },
+                    { item: "🚄 High-speed train Rome to Florence", timeframe: "1 month out", priority: "Medium", note: "Trenitalia Frecciarossa for comfort" },
+                    { item: "🍳 Tuscan Cooking Class", timeframe: "2-3 weeks out", priority: "Low", note: "Many agriturismos offer classes on-site" },
+                    { item: "🎈 Hot Air Balloon (if interested)", timeframe: "1-2 weeks out", priority: "Low", note: "Weather dependent - book with flexible cancellation" }
+                ],
+                packing: [
+                    { category: "👟 Comfortable Feet", item: "Broken-in walking shoes (essential!), backup comfortable pair, blister patches, flip-flops for pool" },
+                    { category: "👗 Smart Layering", item: "Light layers for variable weather, one dressy dinner outfit, scarves for church entry, comfortable travel clothes" },
+                    { category: "🌞 Tuscan Essentials", item: "Swimsuits for pool days, sun hats, SPF 50+ sunscreen, reusable water bottles, light jacket for evenings" },
+                    { category: "📱 Tech & Practical", item: "Portable phone chargers, universal adapters (Type C for Italy), first aid kit, copies of passports" },
+                    { category: "🚗 Van Travel Gear", item: "Car phone mounts for navigation, phone car chargers, snacks for road trips, entertainment for drives" },
+                    { category: "🍷 Foodie Supplies", item: "Wine shipping boxes for purchases, vacuum bags for packing, appetito for amazing meals!" },
+                    { category: "📸 Memory Making", item: "Camera gear, extra memory cards, portable photo printer for sharing, group selfie stick" },
+                    { category: "💊 Health & Safety", item: "Prescription medications, motion sickness remedies, basic first aid, European health insurance cards" }
+                ]
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabs = document.querySelectorAll('.tab-button');
+            const contents = document.querySelectorAll('.tab-content');
+
+            const romeTimelineContainer = document.getElementById('rome-timeline');
+            const romeDayContentContainer = document.getElementById('rome-day-content');
+            const tuscanyTimelineContainer = document.getElementById('tuscany-timeline');
+            const tuscanyDayContentContainer = document.getElementById('tuscany-day-content');
+            
+            const tuscanyOptionsContainer = document.getElementById('tuscany-options');
+            const tuscanyDetailsContainer = document.getElementById('tuscany-details');
+            const amalfiOptionsContainer = document.getElementById('amalfi-options');
+            const amalfiDetailsContainer = document.getElementById('amalfi-details');
+
+            const bookingList = document.getElementById('booking-checklist');
+            const packingList = document.getElementById('packing-checklist');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const target = tab.dataset.tab;
+
+                    tabs.forEach(t => {
+                        t.classList.remove('tab-active');
+                        t.classList.add('tab-inactive');
+                    });
+                    tab.classList.add('tab-active');
+                    tab.classList.remove('tab-inactive');
+
+                    contents.forEach(content => {
+                        if (content.id === target) {
+                            content.classList.remove('hidden');
+                        } else {
+                            content.classList.add('hidden');
+                        }
+                    });
+                });
+            });
+            
+            function createPaceChart() {
+                const ctx = document.getElementById('paceChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Sightseeing & Culture', 'Food & Family Time', 'Pool & Relaxation', 'Travel & Transit'],
+                        datasets: [{
+                            label: 'Our Trip Balance',
+                            data: [40, 25, 20, 15],
+                            backgroundColor: ['#A3704C', '#DCD7D2', '#8B6342', '#CBBBAF'],
+                            borderColor: '#F8F5F2',
+                            borderWidth: 4,
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: {
+                                    font: { family: 'Inter', size: 12 },
+                                    padding: 15,
+                                    usePointStyle: true,
+                                }
+                            },
+                            tooltip: {
+                                bodyFont: { family: 'Inter' },
+                                titleFont: { family: 'Inter' },
+                                callbacks: {
+                                    label: function(context) {
+                                        return context.label + ': ' + context.parsed + '%';
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            function generateDayTimeline(hub, timelineContainer, contentContainer) {
+                const dayData = data[hub];
+                dayData.forEach(day => {
+                    const button = document.createElement('button');
+                    button.className = `day-button-${hub} day-inactive text-sm md:text-base font-semibold py-2 px-4 rounded-lg shadow-sm transition-all duration-300 hover:shadow-md`;
+                    button.textContent = `Day ${day.day}`;
+                    button.dataset.day = day.day;
+                    timelineContainer.appendChild(button);
+                });
+
+                timelineContainer.addEventListener('click', (e) => {
+                    if (e.target.classList.contains(`day-button-${hub}`)) {
+                        const dayNumber = e.target.dataset.day;
+                        const dayInfo = dayData.find(d => d.day == dayNumber);
+
+                        document.querySelectorAll(`.day-button-${hub}`).forEach(btn => {
+                            btn.classList.remove('day-active');
+                            btn.classList.add('day-inactive');
+                        });
+                        e.target.classList.add('day-active');
+                        e.target.classList.remove('day-inactive');
+
+                        const highlightsHTML = dayInfo.highlights ? `
+                            <div class="mb-4">
+                                <h4 class="font-semibold text-[#A3704C] mb-2">🌟 Day Highlights:</h4>
+                                <div class="flex flex-wrap gap-2">
+                                    ${dayInfo.highlights.map(highlight => `
+                                        <span class="bg-[#A3704C] text-white px-3 py-1 rounded-full text-xs">${highlight}</span>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        ` : '';
+
+                        contentContainer.innerHTML = `
+                            <div class="fade-in">
+                                <div class="flex flex-col md:flex-row md:items-center gap-4 mb-6">
+                                    <div class="flex-1">
+                                        <h3 class="text-2xl font-bold mb-1 font-display text-[#A3704C]">${dayInfo.title}</h3>
+                                        <p class="text-sm italic text-gray-600 font-medium">"${dayInfo.vibe}"</p>
+                                    </div>
+                                    <img src="${dayInfo.image}" alt="${dayInfo.title}" class="w-full md:w-1/3 h-48 md:h-32 object-cover rounded-lg shadow-lg">
+                                </div>
+                                
+                                ${highlightsHTML}
+                                
+                                <div class="space-y-4">
+                                    ${dayInfo.schedule.map(item => `
+                                        <div class="flex flex-col md:flex-row gap-3 p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                                            <div class="md:w-1/4">
+                                                <span class="font-bold text-[#A3704C] text-sm md:text-base block mb-1">${item.time}</span>
+                                                <span class="font-semibold text-gray-800 text-sm md:text-base">${item.activity}</span>
+                                            </div>
+                                            <div class="md:w-3/4">
+                                                <p class="text-sm text-gray-600 leading-relaxed">${item.description}</p>
+                                            </div>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        `;
+                    }
+                });
+
+                timelineContainer.querySelector(`.day-button-${hub}`).click();
+            }
+            
+            function generateComparisonTool(id, optionsData, optionsContainer, detailsContainer) {
+                optionsData.forEach(option => {
+                    const button = document.createElement('button');
+                    button.className = `option-button-${id} option-inactive font-semibold py-2 px-4 rounded-lg border-2 transition-all duration-300 text-sm hover:shadow-md`;
+                    button.textContent = option.title;
+                    button.dataset.name = option.name;
+                    optionsContainer.appendChild(button);
+                });
+                
+                optionsContainer.addEventListener('click', e => {
+                    if (e.target.classList.contains(`option-button-${id}`)) {
+                        const optionName = e.target.dataset.name;
+                        const optionInfo = optionsData.find(o => o.name === optionName);
+                        
+                        document.querySelectorAll(`.option-button-${id}`).forEach(btn => {
+                               btn.classList.remove('option-active');
+                               btn.classList.add('option-inactive');
+                        });
+                        e.target.classList.add('option-active');
+                        e.target.classList.remove('option-inactive');
+                        
+                        const recommendation = (optionName === 'Rental Van' || optionName === 'Cooking Class') ? 
+                            '<div class="bg-green-100 border border-green-300 p-3 rounded-lg mb-3"><strong>🌟 Jorden\'s Top Pick for Our Family!</strong><br><span class="text-sm">Best balance of flexibility, value, and family-friendly experience.</span></div>' : '';
+                        
+                        detailsContainer.innerHTML = `
+                                 <div class="bg-white p-4 rounded-lg shadow-inner fade-in">
+                                      ${recommendation}
+                                      <p class="text-sm mb-4 leading-relaxed">${optionInfo.description}</p>
+                                      <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+                                        <div class="bg-gray-50 p-3 rounded-lg"><strong>💰 Cost:</strong> ${optionInfo.cost}</div>
+                                        <div class="bg-gray-50 p-3 rounded-lg"><strong>🛋️ Comfort:</strong> ${optionInfo.comfort}</div>
+                                        <div class="bg-gray-50 p-3 rounded-lg"><strong>👨‍👩‍👧‍👦 Family-Friendly:</strong> <span class="font-bold ${(optionInfo.kidFriendliness === 'Perfect' || optionInfo.familyFriendly === 'Perfect') ? 'text-green-600' : ''}">${optionInfo.kidFriendliness || optionInfo.familyFriendly}</span></div>
+                                        <div class="bg-gray-50 p-3 rounded-lg"><strong>🎯 Best For:</strong> ${optionInfo.bestFor}</div>
+                                      </div>
+                                 </div>
+                        `;
+                    }
+                });
+                
+                optionsContainer.querySelector(`.option-button-${id}`).click();
+            }
+
+            function generateChecklist(listId, dataList) {
+                const container = document.getElementById(listId);
+                container.innerHTML = dataList.map(item => `
+                    <li class="flex items-start gap-3 p-3 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                        <input type="checkbox" class="mt-1 w-5 h-5 text-[#A3704C] rounded focus:ring-[#A3704C] focus:ring-2">
+                        <div class="flex-1">
+                           <label class="font-semibold text-gray-800 cursor-pointer">${item.item}</label>
+                           ${item.timeframe ? `<p class="text-xs text-gray-500 mt-1">${item.timeframe}</p>` : ''}
+                           ${item.note ? `<p class="text-xs text-blue-600 mt-1">💡 ${item.note}</p>` : ''}
+                           ${item.priority ? `<span class="inline-block mt-2 px-2 py-1 text-xs rounded-full ${item.priority === 'Critical' ? 'bg-red-100 text-red-800' : item.priority === 'High' ? 'bg-yellow-100 text-yellow-800' : 'bg-green-100 text-green-800'}">${item.priority} Priority</span>` : ''}
+                        </div>
+                    </li>
+                `).join('');
+            }
+
+            // Initialize everything
+            createPaceChart();
+            generateDayTimeline('rome', romeTimelineContainer, romeDayContentContainer);
+            generateDayTimeline('tuscany', tuscanyTimelineContainer, tuscanyDayContentContainer);
+            generateComparisonTool('tuscany', data.planner.tuscanyOptions, tuscanyOptionsContainer, tuscanyDetailsContainer);
+            generateComparisonTool('amalfi', data.planner.amalfiOptions, amalfiOptionsContainer, amalfiDetailsContainer);
+            generateChecklist('booking-checklist', data.planner.booking);
+            generateChecklist('packing-checklist', data.planner.packing);
+
+            // Add smooth scrolling for better UX
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+        });
+    </script>
+
+</body>
+</html>
